@@ -958,7 +958,7 @@ const proyectos = {
         // DOCUMENTO PDF LOCAL
         
         documentoPDF: {
-            titulo: 'Manual de Diseño y Fabricación de PCB en CNC',
+            titulo: 'Documentacion requerimientos EG ADSR + LFO',
             archivo: './docs/Informe_EG_LFO.pdf',
             altura: '500px'
         },
