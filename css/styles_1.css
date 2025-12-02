@@ -1,0 +1,209 @@
+
+:root{
+    --bg:#0b0e1a;
+    --card:#10172a;
+    --gradient-start:#667eea;
+    --gradient-end:#764ba2;
+}
+
+body{
+    margin:0;
+    background:radial-gradient(1200px 800px at 70% 0%, #10172a, var(--bg));
+    color:#e6edff;
+    font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+}
+
+.bg-gradient-purple {
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+}
+
+.paper-texture {
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.015) 2px, rgba(0,0,0,0.015) 4px);
+}
+
+/* ========== PESTAÑAS ESTILO CARPETA ========== */
+.folder-tabs-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    padding-left: 12px;
+    position: relative;
+    z-index: 20;
+}
+
+.folder-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px 12px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-bottom: none;
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transform: translateY(2px);
+    border-radius: 12px 12px 0 0;
+}
+
+.folder-tab:hover {
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.8);
+    transform: translateY(1px);
+}
+
+.folder-tab.active {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.2);
+    color: white;
+    transform: translateY(0);
+    z-index: 15;
+}
+
+.folder-tab .folder-icon {
+    font-size: 16px;
+}
+
+/* Contenedor del contenido */
+.folder-body {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 0 16px 16px 16px;
+    margin-top: -1px;
+    position: relative;
+    overflow: hidden;
+    max-height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+}
+/* Contenido de pestañas */
+.tab-content {
+    display: none;
+    opacity: 0;
+}
+
+.tab-content.active {
+    display: flex;              
+    flex-direction: column;     
+    opacity: 1;
+    animation: fadeIn 0.3s ease;            
+    /* ✅ CLAVE: Scroll interno */
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== CARRUSEL ========== */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 12px;
+    animation: scroll-infinite 35s linear infinite;
+}
+
+.carousel-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll-infinite {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.carousel-item {
+    flex-shrink: 0;
+    width: 140px;
+}
+
+/* Controles */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.4);
+    border: none;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-btn:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+.carousel-btn.prev { left: 4px; }
+.carousel-btn.next { right: 4px; }
+
+/* Estado vacío */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: rgba(255,255,255,0.3);
+}
+
+.empty-state .empty-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+    opacity: 0.5;
+}
+
+/* Scrollbar */
+.custom-scrollbar::-webkit-scrollbar { width: 3px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 2px; }
+
+/* Loading */
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner { animation: spin 1s linear infinite; }
+
+/* Message animation */
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.message { animation: slideIn 0.3s ease; }
+
+/* Badge nuevo */
+.badge-new {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: linear-gradient(135deg, #f59e0b, #ef4444);
+    color: white;
+    font-size: 8px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 8px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}

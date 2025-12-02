@@ -1,0 +1,30 @@
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Archivos temporales
+*.log
+*.tmp
+.cache/
+
+# Node modules (si decides agregar build tools después)
+node_modules/
+package-lock.json
+
+# Archivos de respaldo
+*.bak
+*~
+
+# Netlify
+.netlify/
+
+# Snyk Security Extension - AI Rules (auto-generated)
+.github/instructions/snyk_rules.instructions.md

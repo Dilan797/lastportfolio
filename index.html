@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Portfolio — Dilan | Ingeniero Electrónico</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Portfolio de Dilan - Estudiante de Ingeniería Electrónica especializado en sistemas embebidos, IoT y diseño de circuitos" />
+    <meta name="keywords" content="ingeniería electrónica, sistemas embebidos, IoT, Arduino, FPGA, PCB, amplificadores" />
+    <meta name="author" content="Dilan" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles_1.css">
+
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'gradient-start': '#667eea',
+                        'gradient-end': '#764ba2',
+                    },
+                    fontFamily: {
+                        'serif': ['Georgia', 'serif'],
+                        'mono': ['Courier New', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Import map para Three.js -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"
+        }
+    }
+    </script>
+
+
+</head>
+<body class="bg-slate-900 text-white font-sans antialiased overflow-x-hidden overflow-y-auto lg:overflow-hidden">
+    
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="fixed inset-0 bg-gradient-purple flex items-center justify-center z-50 transition-opacity duration-500">
+        <div class="w-12 h-12 border-4 border-white/30 border-t-white rounded-full spinner"></div>
+    </div>
+
+    <!-- Layout Principal: Dos Columnas -->
+    <main class="flex flex-col-reverse lg:flex-row min-h-screen lg:h-screen w-screen">
+        
+        <!-- ========== COLUMNA IZQUIERDA: PESTAÑAS + PROYECTOS ========== -->
+        <section class="flex-1 bg-slate-900 relative overflow-hidden flex flex-col p-4 lg:p-6
+                h-auto lg:h-screen overflow-y-auto lg:overflow-hidden">
+            
+            <!-- Efectos de fondo -->
+            <div class="absolute inset-0 opacity-30 pointer-events-none">
+                <div class="absolute top-[20%] left-[20%] w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-[20%] right-[20%] w-96 h-96 bg-white/3 rounded-full blur-3xl"></div>
+            </div>
+
+            <!-- CONTENEDOR PRINCIPAL -->
+            <div class="relative z-10 flex flex-col h-auto lg:h-full">
+                
+                <!-- ========== SISTEMA DE PESTAÑAS ========== -->
+                <div class="flex flex-col flex-1">
+                    
+                    <!-- Pestañas de Carpeta -->
+                    <div class="folder-tabs-container">
+                        <button class="folder-tab active" data-tab="electronica" onclick="switchTab('electronica')">
+                            <span class="folder-icon">⚡</span>
+                            <span>Electrónica Analógica III</span>
+                        </button>
+                        
+                        <button class="folder-tab" data-tab="programacion" onclick="switchTab('programacion')">
+                            <span class="folder-icon">💻</span>
+                        </button>
+
+                        <button class="folder-tab" data-tab="diseno" onclick="switchTab('diseno')">
+                            <span class="folder-icon">🎨</span>
+                        </button>
+                    </div>
+
+                    <!-- Cuerpo de la Carpeta -->
+                    <div class="folder-body flex-1 overflow-hidden">
+                        
+                        <!-- ========== TAB: ELECTRÓNICA ANALÓGICA III ========== -->
+                        <div id="tab-electronica" class="tab-content active p-5 h-full overflow-y-auto custom-scrollbar">
+                            
+                            <!-- Header -->
+                            <!-- ========== INTRODUCCIÓN + COLLAGE ========== -->
+                            <div class="intro-collage-container">
+                                
+                                <!-- Introducción (izquierda) -->
+                                <div class="intro-content">
+                                    
+                                    <!-- Header con icono -->
+                                    <div class="intro-header">
+                                        <div class="intro-icon">⚡</div>
+                                        <div class="intro-title-group">
+                                            <h2 class="intro-title">Electrónica Analógica III</h2>
+                                            <p class="intro-subtitle">Universidad Surcolombiana • 5to Semestre</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Texto de introducción -->
+                                    <div class="intro-text">
+                                        <p>
+                                            Proyectos desarrollados en la asignatura de <strong>Electrónica Analógica III</strong> 
+                                            enfocados en el diseño, simulación e implementación de circuitos con amplificadores 
+                                            operacionales, filtros activos y sistemas de instrumentación.
+                                        </p>
+                                        <p>
+                                            Cada proyecto incluye análisis teórico, simulación en Multisim, 
+                                            diseño de PCB en KiCad y validación experimental con documentación 
+                                            de errores y soluciones encontradas.
+                                        </p>
+                                    </div>
+                                    
+                                    <!-- Tags de metodología -->
+                                    <div class="intro-tags">
+                                        <span class="tag tag-amber">📐 Análisis</span>
+                                        <span class="tag tag-blue">💻 Simulación</span>
+                                        <span class="tag tag-green">🔧 Implementación</span>
+                                        <span class="tag tag-purple">📊 Validación</span>
+                                    </div>
+                                </div>
+
+                                <!-- Collage de fotos (derecha) -->
+                                <div class="collage-grid">
+                                    
+                                    <!-- Foto 1: Grande vertical -->
+                                    <div class="collage-item collage-item-tall">
+                                        <img src="./images/foto1.jpg" alt="Proyecto 1" onerror="this.parentElement.classList.add('no-image')" />
+                                        <div class="collage-placeholder">
+                                            <span class="collage-placeholder-icon">📷</span>
+                                            <span class="collage-placeholder-text">Circuito</span>
+                                        </div>
+                                        <div class="collage-overlay">
+                                            <span>Montaje PCB INA</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Foto 2: Pequeña arriba derecha -->
+                                    <div class="collage-item">
+                                        <img src="./images/foto3.png" alt="Proyecto 2" onerror="this.parentElement.classList.add('no-image')" />
+                                        <div class="collage-placeholder">
+                                            <span class="collage-placeholder-icon">📷</span>
+                                            <span class="collage-placeholder-text">Medición</span>
+                                        </div>
+                                        <div class="collage-overlay">
+                                            <span>Validación</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Foto 3: Pequeña medio derecha -->
+                                    <div class="collage-item">
+                                        <img src="./images/foto2.png" alt="Proyecto 3" onerror="this.parentElement.classList.add('no-image')" />
+                                        <div class="collage-placeholder">
+                                            <span class="collage-placeholder-icon">📷</span>
+                                            <span class="collage-placeholder-text">Simulación</span>
+                                        </div>
+                                        <div class="collage-overlay">
+                                            <span>Diseño KiCad</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Foto 4: Ancha abajo -->
+                                    <div class="collage-item collage-item-wide">
+                                        <img src="./images/foto4.JPG" alt="Proyecto 4" onerror="this.parentElement.classList.add('no-image')" />
+                                        <div class="collage-placeholder">
+                                            <span class="collage-placeholder-icon">📷</span>
+                                            <span class="collage-placeholder-text">Protoboard</span>
+                                        </div>
+                                        <div class="collage-overlay">
+                                            <span>Implementación</span>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                            <!-- Carrusel de Proyectos -->
+                            <div class="mb-5">
+                                <h3 class="text-sm font-semibold text-white/60 uppercase tracking-wider mb-3">Proyectos del Curso</h3>
+                                
+                                <div class="carousel-container py-2" id="carousel-electronica">
+                                    <div class="carousel-track">
+                                        
+                                        <!-- ★ PROYECTO 1: TIA (NUEVO) -->
+                                        <div class="carousel-item group bg-white/10 backdrop-blur-md rounded-lg overflow-hidden border border-white/20 hover:border-amber-400/60 transition-all duration-300 cursor-pointer hover:scale-105 hover:bg-white/15 relative" onclick="openProjectModal(1)">
+                                            
+                                            <div class="h-20 bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center text-3xl">
+                                                💡
+                                            </div>
+                                            <div class="p-2">
+                                                <h4 class="text-white font-semibold text-[10px] mb-0.5 line-clamp-2 leading-tight">Amplificador Transimpedancia (TIA)</h4>
+                                                <p class="text-white/50 text-[8px]">OPA140 • TL084</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Proyecto 2: Amplificador de Instrumentación -->
+                                        <div class="carousel-item group bg-white/10 backdrop-blur-md rounded-lg overflow-hidden border border-white/20 hover:border-white/40 transition-all duration-300 cursor-pointer hover:scale-105 hover:bg-white/15" onclick="openProjectModal(2)">
+                                            <div class="h-20 bg-gradient-to-br from-orange-400 to-red-600 flex items-center justify-center text-3xl">
+                                                🔌
+                                            </div>
+                                            <div class="p-2">
+                                                <h4 class="text-white font-semibold text-[10px] mb-0.5 line-clamp-2 leading-tight">Amplificador de Instrumentación</h4>
+                                                <p class="text-white/50 text-[8px]">TL084 • MC33202P</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Proyecto 3: Poster MVP -->
+                                        <div class="carousel-item group bg-white/10 backdrop-blur-md rounded-lg overflow-hidden border border-white/20 hover:border-white/40 transition-all duration-300 cursor-pointer hover:scale-105 hover:bg-white/15" onclick="openProjectModal(3)">
+                                            <div class="h-20 bg-gradient-to-br from-teal-400 to-cyan-600 flex items-center justify-center text-3xl">
+                                                📊
+                                            </div>
+                                            <div class="p-2">
+                                                <h4 class="text-white font-semibold text-[10px] mb-0.5 line-clamp-2 leading-tight">Póster MVP: Lean Startup</h4>
+                                                <p class="text-white/50 text-[8px]">Divulgación • Equipo</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Proyecto 4: Fuente Regulada -->
+                                        <div class="carousel-item group bg-white/10 backdrop-blur-md rounded-lg overflow-hidden border border-white/20 hover:border-white/40 transition-all duration-300 cursor-pointer hover:scale-105 hover:bg-white/15" onclick="openProjectModal(4)">
+                                            <div class="h-20 bg-gradient-to-br from-green-400 to-teal-600 flex items-center justify-center text-3xl">
+                                                ⚡
+                                            </div>
+                                            <div class="p-2">
+                                                <h4 class="text-white font-semibold text-[10px] mb-0.5 line-clamp-2 leading-tight">Fuente de Alimentación Regulada</h4>
+                                                <p class="text-white/50 text-[8px]">LM317 • LM337</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Proyecto 5: EG ADSR + LFO -->
+                                        <div class="carousel-item group bg-white/10 backdrop-blur-md rounded-lg overflow-hidden border border-white/20 hover:border-white/40 transition-all duration-300 cursor-pointer hover:scale-105 hover:bg-white/15" onclick="openProjectModal(5)">
+                                            <div class="h-20 bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-3xl">
+                                                🎚️
+                                            </div>
+                                            <div class="p-2">
+                                                <h4 class="text-white font-semibold text-[10px] mb-0.5 line-clamp-2 leading-tight">
+                                                    EG ADSR + LFO (Investigación y Simulación)
+                                                </h4>
+                                                <p class="text-white/50 text-[8px]">
+                                                    NE555 • ICM7555 • XR2206 • TL07x
+                                                </p>
+                                            </div>
+                                        </div>
+
+<!-- Duplicados para loop infinito -->
+
+
+                                        <!-- Duplicados para loop infinito -->
+                                        <div class="carousel-item group bg-white/10 backdrop-blur-md rounded-lg overflow-hidden border border-white/20 hover:border-amber-400/60 transition-all duration-300 cursor-pointer hover:scale-105 hover:bg-white/15 relative" onclick="openProjectModal(1)">
+                                            
+                                            <div class="h-20 bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center text-3xl">
+                                                💡
+                                            </div>
+                                            <div class="p-2">
+                                                <h4 class="text-white font-semibold text-[10px] mb-0.5 line-clamp-2 leading-tight">Amplificador Transimpedancia (TIA)</h4>
+                                                <p class="text-white/50 text-[8px]">OPA140 • TL084</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="carousel-item group bg-white/10 backdrop-blur-md rounded-lg overflow-hidden border border-white/20 hover:border-white/40 transition-all duration-300 cursor-pointer hover:scale-105 hover:bg-white/15" onclick="openProjectModal(2)">
+                                            <div class="h-20 bg-gradient-to-br from-orange-400 to-red-600 flex items-center justify-center text-3xl">
+                                                🔌
+                                            </div>
+                                            <div class="p-2">
+                                                <h4 class="text-white font-semibold text-[10px] mb-0.5 line-clamp-2 leading-tight">Amplificador de Instrumentación</h4>
+                                                <p class="text-white/50 text-[8px]">TL084 • MC33202P</p>
+                                            </div>
+                                        </div>                                        
+                                        <div class="carousel-item group bg-white/10 backdrop-blur-md rounded-lg overflow-hidden border border-white/20 hover:border-white/40 transition-all duration-300 cursor-pointer hover:scale-105 hover:bg-white/15" onclick="openProjectModal(4)">
+                                            <div class="h-20 bg-gradient-to-br from-green-400 to-teal-600 flex items-center justify-center text-3xl">
+                                                ⚡
+                                            </div>
+                                            <div class="p-2">
+                                                <h4 class="text-white font-semibold text-[10px] mb-0.5 line-clamp-2 leading-tight">Fuente de Alimentación Regulada</h4>
+                                                <p class="text-white/50 text-[8px]">LM317 • LM337</p>
+                                            </div>
+                                        </div>
+
+                                        
+
+                                    </div>
+                                    <button class="carousel-btn prev" onclick="pauseCarousel()">&lsaquo;</button>
+                                    <button class="carousel-btn next" onclick="resumeCarousel()">&rsaquo;</button>
+                                </div>
+                            </div>
+
+                            <!-- Estadísticas -->
+                            <div class="flex items-center justify-around py-3 border-t border-white/15">
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-white">5</div>
+                                    <div class="text-[10px] text-white/50">Proyectos</div>
+                                </div>
+                                <div class="w-px h-8 bg-white/15"></div>
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-white">10+</div>
+                                    <div class="text-[10px] text-white/50">Circuitos</div>
+                                </div>
+                                <div class="w-px h-8 bg-white/15"></div>
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-white">5</div>
+                                    <div class="text-[10px] text-white/50">Simulaciones</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ========== TAB: PROGRAMACIÓN (VACÍO) ========== -->
+                        <div id="tab-programacion" class="tab-content p-5">
+                            <div class="empty-state">
+                                <div class="empty-icon">💻</div>
+                                <p class="text-sm">Próximamente...</p>
+                            </div>
+                        </div>
+
+                        <!-- ========== TAB: DISEÑO (VACÍO) ========== -->
+                        <div id="tab-diseno" class="tab-content p-5">
+                            <div class="empty-state">
+                                <div class="empty-icon">🎨</div>
+                                <p class="text-sm">Próximamente...</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== COLUMNA DERECHA: TARJETA POLAROID ========== -->
+        <section class="flex items-center justify-center bg-slate-900     
+                        lg:w-[40%] lg:max-w-[400px]
+                        xl:w-[35%] xl:max-w-[500px]
+                        2xl:w-[32%] 2xl:max-w-[500px]
+                        p-4 lg:p-6">
+
+            <!-- TARJETA POLAROID -->
+            <article class="w-full max-w-md h-full 
+                            max-h-[77vh] 
+                            lg:max-h-[90.5vh] 
+                            xl:max-h-[90vh] 
+                            2xl:max-h-[66vh]
+                            bg-white rounded-xl shadow-2xl paper-texture
+                            p-4 lg:p-5 xl:p-6 
+                            flex flex-col">
+
+                <!-- SECCIÓN SUPERIOR: AVATAR + INFO -->
+                <div class="flex gap-4 mb-3 flex-shrink-0">
+
+                    <!-- Avatar 3D -->
+                    <div class="w-1/2 bg-slate-900 rounded-sm shadow-inner relative overflow-hidden
+                                h-[180px] sm:h-[200px] lg:h-[150px] xl:h-[170px] 2xl:h-[180px]">
+                        <div id="stage" class="relative w-full h-full" 
+                            role="img" aria-label="Avatar 3D interactivo de Dilan">
+                            <div id="hud" class="absolute left-2 top-2 bg-white/20 backdrop-blur-md px-2 py-1 rounded text-[8px] font-semibold text-white/95 font-mono tracking-wide shadow-lg border border-white/25 z-10" aria-live="polite">
+                                Cargando…
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INFO - DERECHA -->
+                    <div class="w-1/2 flex flex-col justify-center gap-2">
+                        <div>
+                            <p class="text-xs lg:text-sm font-semibold text-gray-700 leading-tight">
+                                Estudiante de<br/>Ingeniería Electrónica
+                            </p>
+                        </div>
+                        <div class="pb-2 border-b border-dashed border-black/15">
+                            <label class="text-[8px] font-bold tracking-widest text-black/50 uppercase font-mono">CITY</label>
+                            <p class="text-sm lg:text-base font-semibold text-gray-800 font-serif">Neiva, Huila</p>
+                        </div>
+                        <div class="pb-2 border-b border-dashed border-black/15">
+                            <label class="text-[9px] font-bold tracking-widest text-black/50 uppercase font-mono">NAME</label>
+                            <p class="text-2xl lg:text-3xl font-bold text-gradient-start font-serif leading-tight">Dilan</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN DE CONTACTO -->
+                <div class="pb-2 border-b-2 border-black/10 flex-shrink-0">
+                    <label class="text-[8px] lg:text-[9px] font-bold tracking-widest text-black/50 uppercase font-mono mb-0.5 block">CONTACT</label>
+                    <div class="flex items-center justify-between gap-2">
+                        <p class="text-[11px] lg:text-xs text-gray-600 font-mono leading-none">u20212201884@usco.edu.co</p>
+                        <div class="flex items-center gap-1">
+                            <a href="https://www.linkedin.com/in/tu-perfil" target="_blank" rel="noopener noreferrer" 
+                                class="w-7 h-7 flex items-center justify-center bg-gray-100 border border-black/10 rounded-md hover:bg-gradient-purple hover:text-white transition-all duration-300"
+                                title="LinkedIn">
+                                <span class="text-base">💼</span>
+                            </a>
+                            <a href="https://github.com/tu-usuario" target="_blank" rel="noopener noreferrer"
+                                class="w-7 h-7 flex items-center justify-center bg-gray-100 border border-black/10 rounded-md hover:bg-gradient-purple hover:text-white transition-all duration-300"
+                                title="GitHub">
+                                <span class="text-base">🐙</span>
+                            </a>
+                            <a href="mailto:u20212201884@usco.edu.co"
+                                class="w-7 h-7 flex items-center justify-center bg-gray-100 border border-black/10 rounded-md hover:bg-gradient-purple hover:text-white transition-all duration-300"
+                                title="Email">
+                                <span class="text-base">📧</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRESENTACIÓN -->
+                <div class="mt-2 flex-shrink-0">
+                    <h2 class="text-sm lg:text-[15px] font-bold text-gray-800 font-serif italic mb-0.5">Hello!</h2>
+                    <p class="text-[10px] lg:text-[11px] leading-snug text-gray-600 text-justify">
+                        Estudiante de Ingeniería Electrónica apasionado por el diseño de circuitos. 
+                        Experiencia en proyectos académicos con validación en campo y análisis de resultados.
+                    </p>
+                </div>
+
+                <!-- SEPARADOR -->
+                <div class="w-full h-px bg-gradient-to-r from-transparent via-black/20 to-transparent my-2"></div>
+
+                <!-- CHATBOT ASISTENTE -->
+                <div class="flex-1 flex flex-col min-h-0">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-xs lg:text-sm font-semibold text-gray-700 font-serif italic">💬 Asistente Técnico</h3>
+                        <span class="text-[8px] text-gray-400 font-mono">Online</span>
+                    </div>
+
+                    <div id="chatMessages" class="flex-1 bg-gray-50 rounded-lg p-2 overflow-y-auto custom-scrollbar flex flex-col gap-1.5 min-h-0 border border-gray-200" 
+                            role="log" aria-live="polite">
+                        <div class="message flex max-w-[85%] self-start">
+                            <p class="bg-white text-gray-800 rounded-lg rounded-bl-sm shadow-sm px-2.5 py-1.5 text-[10px] lg:text-[9px] leading-snug border border-gray-200">
+                                ¡Hola! 👋 Pregúntame sobre mis proyectos de electrónica, circuitos y sistemas embebidos.
+                            </p>
+                        </div>
+                    </div>
+
+                    <form id="chatForm" class="flex items-center gap-1.5 mt-2">
+                        <input
+                            type="text"
+                            id="chatInput"
+                            placeholder="Pregunta sobre proyectos..."
+                            class="flex-1 border border-gray-300 focus:outline-none focus:border-gradient-start focus:ring-1 focus:ring-gradient-start transition-all px-3 py-1.5 rounded-full text-[10px] lg:text-[9px] text-gray-800"
+                            autocomplete="off"
+                            maxlength="300"
+                        />
+                        <button
+                            type="submit"
+                            class="bg-gradient-purple text-white font-semibold hover:opacity-90 transition-all px-3 py-1.5 rounded-full text-[10px] lg:text-[9px] flex-shrink-0 shadow-md hover:shadow-lg"
+                        >
+                            ➤
+                        </button>
+                    </form>
+                </div>
+
+            </article>
+        </section>
+    </main>
+
+    <!-- ========== MODAL DE PROYECTO ========== -->
+    <div id="projectModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar my-8" onclick="event.stopPropagation()">
+            <!-- Header del Modal -->
+            <div class="sticky top-0 bg-gradient-purple text-white p-6 rounded-t-2xl flex justify-between items-start z-10">
+                <div class="flex items-center gap-4 flex-1">
+                    <div id="modalIcon" class="text-5xl"></div>
+                    <div>
+                        <h3 id="modalTitle" class="text-2xl font-bold mb-1"></h3>
+                        <p id="modalTech" class="text-white/80 text-sm"></p>
+                    </div>
+                </div>
+                <button onclick="closeProjectModal()" class="text-white/80 hover:text-white transition-colors text-3xl leading-none ml-4" aria-label="Cerrar modal">
+                    ×
+                </button>
+            </div>
+
+            <!-- Contenido del Modal -->
+            <div id="modalContent" class="p-6">
+                <!-- El contenido se genera dinámicamente en projects.js -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', () => {
+            const loadingScreen = document.getElementById('loadingScreen');
+            setTimeout(() => {
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => { loadingScreen.style.display = 'none'; }, 500);
+            }, 800);
+        });
+
+        // Cambiar pestaña
+        function switchTab(tabName) {
+            document.querySelectorAll('.folder-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            document.querySelector(`.folder-tab[data-tab="${tabName}"]`).classList.add('active');
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+        }
+
+        // Controles del carrusel
+        function pauseCarousel() {
+            const track = document.querySelector('.carousel-track');
+            track.style.animationPlayState = 'paused';
+        }
+
+        function resumeCarousel() {
+            const track = document.querySelector('.carousel-track');
+            track.style.animationPlayState = 'running';
+        }        
+    </script>
+    <script src="./js/projects.js"></script>
+    <script src="./js/main.js"></script>
+
+    <script type="module" src="./js/script.js"></script>
+</body>
+</html>

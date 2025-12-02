@@ -1,0 +1,709 @@
+/* ============================================
+PORTFOLIO CSS - VERSIÓN OPTIMIZADA
+Layout horizontal con avatar + nombre
+   ============================================ */
+
+:root{
+    --bg:#0b0e1a;
+    --card:#10172a;
+    --ring:#263152;
+    --text:#e6edff;
+    --muted:#a5b4fc;
+    --accent:#6366f1;
+    --gradient-start:#667eea;
+    --gradient-end:#764ba2;
+    --transition-speed: 0.3s;
+}
+
+/* ========== RESET Y BASE ========== */
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+    overflow-x:hidden;
+    width: 100%;
+    max-width: 100vw;
+    height: 100%;
+}
+
+body{
+    margin:0;
+    background:radial-gradient(1200px 800px at 70% 0%, #10172a, var(--bg));
+    color:var(--text);
+    font-family:system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+    font-size:clamp(14px,1.1vw,18px);
+    line-height:1.6;
+    overflow:hidden; /* Sin scroll en toda la página */
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* ========== GRADIENTES Y TEXTURAS ========== */
+.bg-gradient-purple {
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+}
+
+.paper-texture {
+    background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.015) 2px,
+        rgba(0,0,0,0.015) 4px
+    );
+}
+
+/* ========== ANIMACIONES ========== */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message {
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes spin {
+    to { 
+        transform: rotate(360deg); 
+    }
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes slideDown{
+    from{ transform:translateY(-100%); }
+    to{ transform:translateY(0); }
+}
+
+/* ========== CANVAS DEL AVATAR 3D ========== */
+#stage canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
+}
+
+/* Móvil: margen negativo para centrar */
+@media (max-width: 1023px) {
+    #stage canvas {
+        margin-top: -5vw;
+        
+    }
+}
+
+/* Desktop: ajuste fino para el layout horizontal */
+@media (min-width: 1024px) and (max-width: 1439px) {
+    #stage canvas {
+        margin-top: -4vh;
+        
+    }
+}
+
+@media (min-width: 1440px) {
+    #stage canvas {
+        margin-top: -3vh;
+        
+    }
+}
+
+@media (min-width: 1920px) {
+    #stage canvas {
+        margin-top: -3vh;
+    
+    }
+}
+
+/* ========== SCROLLBAR PERSONALIZADO ========== */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.1);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.3);
+    border-radius: 2px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.5);
+}
+
+/* ========== CHATBOT FLOTANTE ========== */
+.chatbot-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+    z-index: 10;
+}
+
+.chatbot-collapsed {
+    transform: translateY(calc(100% - 35px));
+}
+
+.chatbot-expanded {
+    transform: translateY(0);
+}
+
+.chatbot-toggle {
+    cursor: pointer;
+    user-select: none;
+}
+
+/* ========== HUD DE CARGA ========== */
+#hud {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.5px;
+    transition: opacity 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    z-index: 20;
+}
+
+/* ========== ACCESIBILIDAD ========== */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+::selection {
+    background: var(--accent);
+    color: white;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ========== MÓVILES PEQUEÑOS ========== */
+@media (max-width: 359px) {
+    body { 
+        font-size: 14px; 
+    }
+    #stage canvas {
+        margin-top: -10vw;
+    }
+}
+
+/* ========== LANDSCAPE MÓVIL ========== */
+@media (max-width: 900px) and (orientation: landscape) {
+    #stage canvas {
+        margin-top: -6vw;
+    }
+}
+
+/* ========== ALTO CONTRASTE ========== */
+@media (prefers-contrast: more) {
+    .bg-gradient-purple {
+        outline: 2px solid #000;
+    }
+}
+/* ============================================
+   CARRUSEL INFINITO - COMPACTO
+   ============================================ */
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel-track {
+    display: flex;
+    animation: scroll-infinite 35s linear infinite;
+}
+
+/* Pausar animación al hacer hover */
+.carousel-track:hover {
+    animation-play-state: paused;
+}
+
+/* Animación de scroll infinito */
+@keyframes scroll-infinite {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Tarjetas del carrusel - MÁS COMPACTAS */
+.carousel-item {
+    min-width: 112px;  /* w-28 = 112px */
+    max-width: 112px;
+}
+
+@media (min-width: 768px) {
+    .carousel-item {
+        min-width: 120px;
+        max-width: 120px;
+    }
+
+}
+
+@media (min-width: 1024px) {
+    .carousel-item {
+        min-width: 128px;
+        max-width: 128px;
+    }
+}
+
+/* Limitar texto a 2 líneas */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Ocultar scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+/* Reset completo para botones del carrusel */
+.carousel-container button {
+    background: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+.carousel-container button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.carousel-container button:active {
+    background: none !important;
+}
+
+
+/* ============================================
+    INTRODUCCIÓN + COLLAGE
+============================================ */
+
+.intro-collage-container {
+    display: flex;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    align-items: stretch; 
+}
+
+/* ===== INTRODUCCIÓN (IZQUIERDA) ===== */
+.intro-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+}
+
+.intro-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.intro-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #f59e0b, #ea580c);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.intro-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.intro-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.intro-subtitle {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+.intro-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.intro-text p {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0;
+}
+
+.intro-text strong {
+    color: #fbbf24;
+}
+
+.intro-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tag {
+    padding: 4px 10px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.tag-amber {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fcd34d;
+}
+
+.tag-blue {
+    background: rgba(59, 130, 246, 0.2);
+    color: #93c5fd;
+}
+
+.tag-green {
+    background: rgba(34, 197, 94, 0.2);
+    color: #86efac;
+}
+
+.tag-purple {
+    background: rgba(168, 85, 247, 0.2);
+    color: #d8b4fe;
+}
+
+/* ===== COLLAGE (DERECHA) ===== */
+.collage-grid {
+    width: 320px;
+    height: 50vh;
+    flex-shrink: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 0.7fr;
+    gap: 8px;
+    aspect-ratio: 4/3; 
+}
+
+.collage-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+}
+
+.collage-item:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.02);
+    z-index: 5;
+}
+
+.collage-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* Cuando no hay imagen */
+.collage-item.no-image img {
+    display: none;
+}
+
+.collage-item.no-image .collage-placeholder {
+    opacity: 1;
+}
+
+/* Placeholder */
+.collage-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.collage-placeholder-icon {
+    font-size: 20px;
+    opacity: 0.4;
+}
+
+.collage-placeholder-text {
+    font-size: 8px;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Overlay con texto al hacer hover */
+.collage-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 6px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.collage-item:hover .collage-overlay {
+    opacity: 1;
+}
+
+.collage-overlay span {
+    font-size: 9px;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Item grande (vertical, ocupa 2 filas) */
+.collage-item-tall {
+    grid-row: span 2;
+}
+
+/* Item ancho (horizontal, ocupa 2 columnas) */
+.collage-item-wide {
+    grid-column: span 2;
+}
+
+/* ===== RESPONSIVE COLLAGE ===== */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 1024px) {
+    .collage-grid {
+        width: 45vh;
+        height: 40vh;
+    }
+}
+
+/* Tablets pequeñas */
+@media (max-width: 768px) {
+    .intro-collage-container {
+        flex-direction: column;
+        padding: 16px;
+        gap: 16px;
+    }
+
+    .collage-grid {
+        width: 70vh;
+        height: 200px;
+        aspect-ratio: unset;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 1fr 1fr;
+        gap: 6px;
+    }
+
+    .collage-item-tall {
+        grid-row: span 2;
+        grid-column: span 1;
+    }
+
+    .collage-item-wide {
+        grid-column: span 2;
+        grid-row: span 1;
+    }
+
+    .intro-title {
+        font-size: 1.1rem;
+    }
+
+    .intro-text p {
+        font-size: 0.75rem;
+    }
+
+    .intro-tags {
+        gap: 4px;
+    }
+
+    .tag {
+        font-size: 0.6rem;
+        padding: 3px 8px;
+    }
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+    .intro-collage-container {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .intro-header {
+        gap: 10px;
+    }
+
+    .intro-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        border-radius: 8px;
+    }
+
+    .intro-title {
+        font-size: 1rem;
+    }
+
+    .intro-subtitle {
+        font-size: 0.7rem;
+    }
+
+    .intro-text p {
+        font-size: 0.7rem;
+        line-height: 1.5;
+    }
+
+    .collage-grid {
+        height: 180px;
+        width: 47vh;
+        max-width: 100vh;
+        gap: 5px;
+        align-items: center;
+    }
+
+    .collage-item {
+        border-radius: 6px;
+    }
+
+    .collage-overlay span {
+        font-size: 8px;
+        padding-bottom: 4px;
+    }
+
+    .collage-placeholder-icon {
+        font-size: 16px;
+    }
+
+    .collage-placeholder-text {
+        font-size: 7px;
+    }
+}
+
+/* Móviles muy pequeños */
+@media (max-width: 360px) {
+    .intro-collage-container {
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    .intro-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+
+    .intro-title {
+        font-size: 0.9rem;
+    }
+
+    .intro-text p {
+        font-size: 0.65rem;
+    }
+
+    
+
+    .tag {
+        font-size: 0.55rem;
+        padding: 2px 6px;
+    }
+}
+
+/* Landscape en móviles */
+@media (max-width: 900px) and (orientation: landscape) {
+    .intro-collage-container {
+        flex-direction: row;
+    }
+
+    .collage-grid {
+        width: 50%;
+        height: 180px;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .intro-content {
+        width: 50%;
+    }
+}
