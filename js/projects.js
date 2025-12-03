@@ -1218,10 +1218,10 @@ const proyectos = {
         },
 
         imagenes: [
-            { url: 'images/projects/proyecto6-adsr-esquema.png', caption: 'Esquemático del módulo ADSR', tipo: 'esquematico' },
-            { url: 'images/projects/proyecto6-lfo-esquema.png', caption: 'Esquemático del módulo LFO', tipo: 'esquematico' },
-            { url: 'images/projects/proyecto6-protoboard.jpg', caption: 'Prototipo en protoboard', tipo: 'implementacion' },
-            { url: 'images/projects/proyecto6-mediciones.jpg', caption: 'Mediciones con osciloscopio', tipo: 'resultados' }
+            { url: 'images/projects/proyecto6-adsr-protoboard.jpg', caption: 'Prototipo del módulo ADSR', tipo: 'Implementacion ADSR' },
+            { url: 'images/foto3.png', caption: 'Medicion osciloscopio módulo LFO', tipo: 'Medición' },
+            { url: 'images/projects/proyecto6-protoboard.jpg', caption: 'Prototipo en protoboard LFO', tipo: 'Implementacion LFO' },
+            { url: 'images/projects/proyecto6-mediciones.jpg', caption: 'Mediciones onda cuadrada LFO', tipo: 'Medicion Osciloscopio' }
         ]
     },
 };
