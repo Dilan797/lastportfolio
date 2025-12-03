@@ -970,6 +970,260 @@ const proyectos = {
             { url: 'images/projects/eg-lfo-pcb-preview.png', caption: 'Curvas de envolvente y señal ADSR en el osciloscopio virtual', tipo: 'Simulación LFO' }
         ]
     },
+     // ============================================
+    // PROYECTO 6: IMPLEMENTACIÓN ADSR + LFO - SINTETIZADOR MOOG
+    // ============================================
+    6: {
+        icon: '🎹',
+        title: 'Implementación ADSR + LFO: Sintetizador Moog',
+        tech: 'NE555/TLC555 • TL071/TL074 • KiCad • Síntesis Analógica',
+        gradient: 'from-indigo-500 to-purple-600',
+        
+        descripcion: `Diseño, desarrollo y validación completa de los módulos LFO (Low Frequency Oscillator) y ADSR 
+        (Attack-Decay-Sustain-Release) para un sintetizador analógico tipo Moog. El proyecto integra simulación en 
+        Multisim, prototipado en protoboard, diseño de PCB en KiCad y preparación de archivos Gerber para fabricación 
+        comercial (JLCPCB/PCBWay) con costo inferior a 15 USD por módulo. Los módulos generan envolventes musicalmente 
+        expresivas y oscilaciones de modulación con formas de onda SQR, TRI y SINE de 1-20 Hz.`,
+
+        // MARCO TEÓRICO
+        marcoTeorico: {
+            titulo: 'Fundamentos de Síntesis Analógica Modular',
+            conceptos: [
+                {
+                    nombre: 'Envolvente ADSR',
+                    descripcion: 'Generador que define Attack (subida), Decay (caída inicial), Sustain (nivel sostenido) y Release (caída final). Controla la evolución temporal de amplitud o filtro.',
+                    ecuacion: 'Vout(t) = f(A, D, S, R, gate)'
+                },
+                {
+                    nombre: 'Arquitectura 555 + Op-Amp',
+                    descripcion: 'El NE555/TLC555 actúa como comparador y control de fases. El TL071/TL072 proporciona buffer de Sustain y attenuverter de salida (−10V a +10V).',
+                    ecuacion: 't = 0.693 × R × C'
+                },
+                {
+                    nombre: 'LFO Schmitt + Integrador',
+                    descripcion: 'Núcleo oscilador donde el Schmitt trigger define umbrales de conmutación y el integrador genera rampas lineales para onda triangular.',
+                    ecuacion: 'f = 1 / (4 × R × C × ΔV/Vth)'
+                },
+                {
+                    nombre: 'Sine Shaper',
+                    descripcion: 'Conversión de onda triangular a senoidal mediante red de diodos que redondea los picos, logrando THD < 5%.',
+                    ecuacion: 'THD = √(V2² + V3² + ...) / V1 × 100%'
+                }
+            ]
+        },
+
+        objetivos: [
+            'Diseñar módulos ADSR y LFO funcionales para sintetizador tipo Moog',
+            'Implementar arquitectura híbrida NE555 + TL071/TL072 con mejoras de estabilidad',
+            'Lograr envolventes con tiempos ajustables: Attack 1ms-1s, Decay 50ms-1.2s, Release 50ms-1.5s',
+            'Generar LFO con rango 1-20 Hz y formas de onda SQR, TRI, SINE',
+            'Diseñar PCB compatible con fabricación comercial (< 15 USD/módulo)',
+            'Validar integración con VCO/VCF/VCA del sistema modular',
+            'Documentar proceso completo para replicación académica'
+        ],
+
+        proceso: [
+            {
+                etapa: 'Diseño del Circuito ADSR',
+                actividades: [
+                    'Selección de arquitectura: NE555/TLC555 + TL071/TL072',
+                    'Diseño de redes RC independientes para A, D, R con diodos Schottky BAT54',
+                    'Implementación de buffer de Sustain para independizar de Decay',
+                    'Diseño de attenuverter de salida (−10V a +10V)',
+                    'Driver LED aislado para visualización sin afectar envolvente'
+                ]
+            },
+            {
+                etapa: 'Diseño del Circuito LFO',
+                actividades: [
+                    'Implementación de núcleo Schmitt Trigger + Integrador con TL074',
+                    'Resistencia de arranque 10MΩ para inicio garantizado',
+                    'Selector de rango con capacitores 100nF/1µF (1-20 Hz)',
+                    'Diseño de Sine Shaper con diodos y trimmer de calibración',
+                    'Buffers dedicados para salidas SQR, TRI, SINE (Zout ≤ 1kΩ)'
+                ]
+            },
+            {
+                etapa: 'Simulación en Multisim',
+                actividades: [
+                    'Verificación de fases ADSR: Attack lineal, Decay exponencial, Sustain estable',
+                    'Medición de tiempos con diferentes valores de potenciómetros',
+                    'Análisis de formas de onda LFO: duty 50%±5%, amplitud 10Vpp',
+                    'Validación de THD < 5% en salida senoidal',
+                    'Prueba de modulación cruzada ADSR→VCA, LFO→VCO'
+                ]
+            },
+            {
+                etapa: 'Prototipado en Protoboard',
+                actividades: [
+                    'Montaje de ADSR con diodos Schottky y buffer de Sustain',
+                    'Montaje de LFO con selector de frecuencia y shaper de seno',
+                    'Mediciones con osciloscopio: envolventes, formas de onda, frecuencias',
+                    'Ajustes de valores para normalizar amplitudes a 10Vpp',
+                    'Pruebas de integración con módulos VCO/VCF/VCA'
+                ]
+            },
+            {
+                etapa: 'Diseño de PCB en KiCad',
+                actividades: [
+                    'Creación de esquemáticos con símbolos estándar',
+                    'Layout de PCB doble cara, FR-4 1.6mm, cobre 1oz',
+                    'Trazado con ancho mínimo 10mil, separación 10mil',
+                    'Planos de tierra para reducción de ruido',
+                    'Verificación DRC/ERC sin errores'
+                ]
+            },
+            {
+                etapa: 'Generación de Archivos de Fabricación',
+                actividades: [
+                    'Exportación de Gerbers (F.Cu, B.Cu, máscara, serigrafía)',
+                    'Generación de archivos de taladrado (drill files)',
+                    'Creación de BOM optimizada para costo < 15 USD',
+                    'Empaquetado .zip compatible con JLCPCB/PCBWay',
+                    'Cotización: ~1-1.5 USD por PCB (lote de 5)'
+                ]
+            }
+        ],
+
+        // ESPECIFICACIONES TÉCNICAS
+        especificaciones: {
+            titulo: 'Especificaciones de los Módulos',
+            parametros: [
+                { nombre: 'ADSR - Attack', valor: '1 ms – 1 s', nota: 'Ajustable con potenciómetro' },
+                { nombre: 'ADSR - Decay', valor: '50 ms – 1.2 s', nota: 'Independiente de Sustain' },
+                { nombre: 'ADSR - Sustain', valor: '0 – 100%', nota: 'Referencia bufereada' },
+                { nombre: 'ADSR - Release', valor: '50 ms – 1.5 s', nota: 'Caída suave controlada' },
+                { nombre: 'ADSR - Salida', valor: '0–10V / ±10V', nota: 'Con attenuverter' },
+                { nombre: 'LFO - Frecuencia', valor: '1 – 20 Hz', nota: 'Selector de rango' },
+                { nombre: 'LFO - Formas de onda', valor: 'SQR, TRI, SINE', nota: 'Bufferizadas' },
+                { nombre: 'LFO - Amplitud', valor: '10 Vpp ±5%', nota: 'Normalizada' },
+                { nombre: 'LFO - THD (seno)', valor: '< 5%', nota: 'Con shaper calibrado' },
+                { nombre: 'Impedancia salida', valor: '≤ 1 kΩ', nota: 'Ambos módulos' },
+                { nombre: 'Gate mínimo', valor: '≥ 5V', nota: 'Compatibilidad modular' },
+                { nombre: 'Alimentación', valor: '±12V / ±15V', nota: 'Estándar Eurorack/Moog' }
+            ]
+        },
+
+        // LISTA DE COMPONENTES
+        componentesBOM: {
+            titulo: 'Componentes Principales (BOM)',
+            componentes: [
+                { referencia: 'U1', descripcion: 'NE555 / TLC555 (núcleo ADSR)', cantidad: 1, huella: 'DIP-8' },
+                { referencia: 'U2', descripcion: 'TL071/TL072 (buffer + attenuverter)', cantidad: 1, huella: 'DIP-8' },
+                { referencia: 'U3', descripcion: 'TL074 (núcleo LFO + buffers)', cantidad: 1, huella: 'DIP-14' },
+                { referencia: 'D1-D6', descripcion: 'BAT54/BAT43 Schottky (rutas A/D/R)', cantidad: 6, huella: 'SOD-323' },
+                { referencia: 'Q1', descripcion: '2N2222 (driver LED)', cantidad: 2, huella: 'TO-92' },
+                { referencia: 'POT A/D/S/R', descripcion: 'Potenciómetros 10kΩ lineal', cantidad: 4, huella: '9mm' },
+                { referencia: 'POT Rate', descripcion: 'Potenciómetro 100kΩ log (LFO)', cantidad: 1, huella: '9mm' },
+                { referencia: 'C1 (LFO)', descripcion: 'Selector 100nF / 1µF', cantidad: 2, huella: 'Film/Electrolítico' },
+                { referencia: 'R arranque', descripcion: 'Resistencia 10MΩ (arranque LFO)', cantidad: 1, huella: '0805' },
+                { referencia: 'Trimmer', descripcion: 'Trimmer 10kΩ (calibración seno)', cantidad: 1, huella: '3296W' }
+            ]
+        },
+
+        errores: [
+            {
+                problema: 'Decay dependiente del nivel de Sustain',
+                descripcion: 'Sin buffer, la resistencia del potenciómetro de Sustain afectaba la curva de Decay',
+                evidencia: 'Curvas de Decay inconsistentes en simulación inicial'
+            },
+            {
+                problema: 'Clics audibles al activar gate',
+                descripcion: 'El NE555 bipolar genera picos de corriente que se acoplan a la alimentación',
+                evidencia: 'Ruido audible en VCA conectado al mismo riel'
+            },
+            {
+                problema: 'LFO no arrancaba en frío',
+                descripcion: 'Condición de simetría del integrador impedía inicio de oscilación',
+                evidencia: 'Oscilador detenido al encender el sistema'
+            },
+            {
+                problema: 'THD elevada en salida senoidal',
+                descripcion: 'Shaper de diodos sin calibración generaba distorsión > 10%',
+                evidencia: 'Forma de onda con picos visibles en osciloscopio'
+            }
+        ],
+
+        soluciones: [
+            {
+                accion: 'Buffer de Sustain con TL071',
+                detalle: 'Seguidor de voltaje que aísla el potenciómetro del nodo de Decay',
+                resultado: 'Curvas de Decay predecibles e independientes de Sustain'
+            },
+            {
+                accion: 'Migración a TLC555 CMOS',
+                detalle: 'Versión pin-compatible con menor consumo y sin picos de corriente',
+                resultado: 'Eliminación de clics, menor ruido en alimentación'
+            },
+            {
+                accion: 'Resistencia de arranque 10MΩ',
+                detalle: 'Conectada de salida cuadrada al nodo del integrador',
+                resultado: 'Arranque garantizado en frío, oscilación inmediata'
+            },
+            {
+                accion: 'Trimmer de calibración en shaper',
+                detalle: 'Ajuste fino de la red de diodos para minimizar distorsión',
+                resultado: 'THD < 5% en rango de 0.1-5 Hz'
+            }
+        ],
+
+        logros: [
+            'Módulos ADSR y LFO 100% funcionales validados en protoboard',
+            'Envolventes musicalmente expresivas con tiempos ajustables según especificación',
+            'LFO con 3 formas de onda (SQR, TRI, SINE) y rango 1-20 Hz cumplido',
+            'Integración exitosa con VCO/VCF/VCA del sintetizador modular',
+            'PCB diseñada en KiCad lista para fabricación comercial',
+            'Costo de fabricación < 15 USD por módulo (objetivo cumplido)',
+            'Archivos Gerber y BOM generados para JLCPCB/PCBWay',
+            'Documentación técnica completa para replicación académica'
+        ],
+
+        reflexion: {
+            aprendizajes: [
+                'La combinación EG + LFO es fundamental para dar movimiento y expresividad al sonido',
+                'El buffer de Sustain es crítico para envolventes predecibles y musicales',
+                'La resistencia de arranque en LFO elimina problemas de inicio en frío',
+                'Los diodos Schottky mejoran significativamente los tiempos de transición',
+                'La migración a CMOS reduce ruido sin cambiar el diseño base'
+            ],
+            mejoras: [
+                'Implementar curvas exponenciales en Attack/Decay para sonido más natural',
+                'Añadir entrada CV para control externo de parámetros ADSR',
+                'Explorar sincronización de LFO con tempo externo (clock)',
+                'Diseñar panel frontal Eurorack para integración completa'
+            ]
+        },
+
+        contribucionEquipo: {
+            rolPersonal: 'Diseño de circuitos, simulación en Multisim y documentación técnica',
+            colaboracion: 'Trabajo en equipo con Dumar Delgado, Juan Díaz, Daniel Gómez, Felipe Dussan',
+            impacto: 'Módulos base para el sintetizador modular del curso de Electrónica Analógica III'
+        },
+
+        tecnologias: ['NE555/TLC555', 'TL071/TL072/TL074', 'Multisim', 'KiCad 7.x', 'Osciloscopio Digital', 'Diodos Schottky BAT54', 'Protoboard', 'Archivos Gerber'],
+
+        // DOCUMENTO PDF LOCAL
+        documentoPDF: {
+            titulo: 'Informe Técnico Completo - Proyecto ADSR + LFO',
+            archivo: './docs/Proyecto_ADSR_LFO.pdf',
+            altura: '500px'
+        },
+
+        // VIDEO DEL PROYECTO
+        videoProyecto: {
+            titulo: 'Demostración del Funcionamiento',
+            url: './videos/demo-adsr-lfo.mp4',
+            tipo: 'local', // 'local' o 'youtube'
+            youtubeId: null // Si es YouTube, poner el ID del video
+        },
+
+        imagenes: [
+            { url: 'images/projects/proyecto6-adsr-esquema.png', caption: 'Esquemático del módulo ADSR', tipo: 'esquematico' },
+            { url: 'images/projects/proyecto6-lfo-esquema.png', caption: 'Esquemático del módulo LFO', tipo: 'esquematico' },
+            { url: 'images/projects/proyecto6-protoboard.jpg', caption: 'Prototipo en protoboard', tipo: 'implementacion' },
+            { url: 'images/projects/proyecto6-mediciones.jpg', caption: 'Mediciones con osciloscopio', tipo: 'resultados' }
+        ]
+    },
 };
 
 
@@ -1027,6 +1281,44 @@ function openProjectModal(projectId) {
                             <span>📥</span> Descargar PDF
                     </a>
                 </div>
+            </div>
+        `;
+    }
+    // Video del Proyecto (si existe)
+    if (proyecto.videoProyecto) {
+        let videoContent = '';
+        if (proyecto.videoProyecto.tipo === 'youtube' && proyecto.videoProyecto.youtubeId) {
+            // Renderiza iframe de YouTube
+            videoContent = `
+                <div class="aspect-video rounded-lg overflow-hidden border border-gray-300 shadow-inner">
+                    <iframe 
+                        src="https://www.youtube.com/embed/${proyecto.videoProyecto.youtubeId}"
+                        width="100%" 
+                        height="100%"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            `;
+        } else {
+            // Renderiza video local con controles
+            videoContent = `
+                <div class="aspect-video rounded-lg overflow-hidden border border-gray-300 shadow-inner bg-black">
+                    <video 
+                        src="${proyecto.videoProyecto.url}"
+                        controls
+                        class="w-full h-full">
+                        Tu navegador no soporta el elemento de video.
+                    </video>
+                </div>
+            `;
+        }
+        
+        content += `
+            <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-4 border border-indigo-200">
+                <h4 class="text-lg font-bold text-indigo-900 mb-3">🎬 ${proyecto.videoProyecto.titulo}</h4>
+                ${videoContent}
             </div>
         `;
     }
