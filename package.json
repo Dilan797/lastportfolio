@@ -1,0 +1,15 @@
+{
+    "name": "portfolio-chatbot",
+    "version": "1.0.0",
+    "description": "Portfolio de Dilan con chatbot IA usando DeepSeek",
+    "scripts": {
+        "dev": "netlify dev",
+        "build": "echo 'No build step required'"
+    },
+    "dependencies": {
+        "node-fetch": "^2.7.0"
+    },
+    "devDependencies": {
+        "netlify-cli": "^23.12.3"
+    }
+}
