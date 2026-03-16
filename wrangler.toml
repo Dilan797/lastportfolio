@@ -1,7 +1,5 @@
 name = "portfolio-dilan"
 compatibility_date = "2024-12-01"
-pages_build_output_dir = "."
 
-[vars]
-# Variables no sensibles van aquí
-# Las sensibles (DEEPSEEK_API_KEY) se configuran en el dashboard de Cloudflare
+# Indica a wrangler que esto es un proyecto Pages (no Workers)
+pages_build_output_dir = "."
