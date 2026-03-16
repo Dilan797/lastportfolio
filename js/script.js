@@ -18,7 +18,6 @@ const container = document.getElementById('stage');
 const HUD = document.getElementById('hud');
 const log = (m) => { console.log(m); if (HUD) HUD.textContent = m; };
 
-// Detección de dispositivo — una sola vez
 const isMobile = window.matchMedia('(max-width: 1023px)').matches
     || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
@@ -29,7 +28,6 @@ function getCameraSettings() {
     return { fov: 35, position: [0, 1.35, 1.8] };
 }
 
-// ========== ESCENA ==========
 const scene = new THREE.Scene();
 scene.background = null;
 
@@ -37,12 +35,12 @@ const settings = getCameraSettings();
 const camera = new THREE.PerspectiveCamera(
     settings.fov,
     container.clientWidth / container.clientHeight,
-    0.1, 50 // far plane reducido: el modelo nunca está a más de 5 unidades
+    0.1, 50
 );
 camera.position.set(...settings.position);
 
 const renderer = new THREE.WebGLRenderer({
-    antialias: !isMobile, // desactivar antialiasing en mobile
+    antialias: !isMobile,
     alpha: true,
     powerPreference: 'high-performance'
 });
@@ -51,7 +49,6 @@ renderer.setSize(container.clientWidth, container.clientHeight);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 
-// Sombras solo en desktop — ahorro significativo de GPU en mobile
 if (!isMobile) {
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -59,7 +56,6 @@ if (!isMobile) {
 
 container.appendChild(renderer.domElement);
 
-// ========== LUCES (simplificadas en mobile) ==========
 scene.add(new THREE.AmbientLight(0xffffff, isMobile ? 0.6 : 0.4));
 scene.add(new THREE.HemisphereLight(0xffffff, 0x334466, 0.5));
 
@@ -90,7 +86,6 @@ if (!isMobile) {
     scene.add(ground);
 }
 
-// ========== LOADERS ==========
 const draco = new DRACOLoader();
 draco.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/libs/draco/');
 
@@ -103,7 +98,6 @@ loader.setDRACOLoader(draco);
 loader.setKTX2Loader(ktx2);
 loader.setMeshoptDecoder(MeshoptDecoder);
 
-// ========== CARGA DEL MODELO (sin HEAD preflight) ==========
 log('Cargando modelo…');
 
 let model = new THREE.Group();
@@ -112,14 +106,12 @@ loader.load(
     (gltf) => {
         model = gltf.scene;
 
-        // Configurar meshes — skip sombras en mobile
         model.traverse(o => {
             if (o.isMesh) {
                 if (!isMobile) {
                     o.castShadow = true;
                     o.receiveShadow = true;
                 }
-                // Frustum culling siempre activo
                 o.frustumCulled = true;
             }
         });
@@ -135,7 +127,6 @@ loader.load(
         scene.add(model);
         log('Listo');
 
-        // Auto-hide HUD
         setTimeout(() => {
             if (HUD) {
                 HUD.style.transition = 'opacity 0.5s ease';
@@ -146,7 +137,6 @@ loader.load(
             }
         }, 1500);
 
-        // Aplicar pose y expresión
         applyArmsCrossedFixed(model, { tightness: 0.8 });
         applySmile(model, 0.4);
     },
@@ -162,9 +152,8 @@ loader.load(
     }
 );
 
-// ========== INTERACCIÓN CON MOUSE ==========
 let targetRotationY = 0;
-const smoothing = 0.08; // más rápido que 0.05
+const smoothing = 0.08;
 
 container.addEventListener('mousemove', (e) => {
     const rect = container.getBoundingClientRect();
@@ -176,7 +165,6 @@ container.addEventListener('mouseleave', () => {
     targetRotationY = 0;
 }, { passive: true });
 
-// ========== RENDER LOOP ==========
 let isPlaying = true;
 
 function animate() {
@@ -191,13 +179,11 @@ function animate() {
 }
 animate();
 
-// Pause/resume en visibilidad
 document.addEventListener('visibilitychange', () => {
     isPlaying = !document.hidden;
     if (isPlaying) animate();
 });
 
-// ========== RESIZE (debounced) ==========
 let resizeTimer;
 addEventListener('resize', () => {
     clearTimeout(resizeTimer);
@@ -213,7 +199,6 @@ addEventListener('resize', () => {
     }, 150);
 });
 
-// ========== CLEANUP ==========
 window.addEventListener('beforeunload', () => {
     renderer.dispose();
     scene.traverse(object => {
@@ -232,7 +217,6 @@ window.addEventListener('beforeunload', () => {
     ktx2.dispose();
 });
 
-// ========== CONTROLES DE TECLADO ==========
 document.addEventListener('keydown', (e) => {
     if (!model) return;
 

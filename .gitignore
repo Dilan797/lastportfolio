@@ -15,7 +15,7 @@ desktop.ini
 *.tmp
 .cache/
 
-# Node modules (si decides agregar build tools después)
+# Node modules
 node_modules/
 package-lock.json
 

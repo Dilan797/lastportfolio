@@ -3,10 +3,21 @@
     "version": "1.0.0",
     "description": "Portfolio de Dilan con chatbot IA usando DeepSeek",
     "scripts": {
+<<<<<<< HEAD
         "dev": "npx wrangler pages dev . --port 8788",
         "deploy": "npx wrangler pages deploy ."
     },
     "devDependencies": {
         "wrangler": "^4.0.0"
+=======
+        "dev": "netlify dev",
+        "build": "echo 'No build step required'"
+    },
+    "dependencies": {
+        "node-fetch": "^2.7.0"
+    },
+    "devDependencies": {
+        "netlify-cli": "^23.12.3"
+>>>>>>> eb77c32c840e6221d9854cb8bb35456226b97c02
     }
 }

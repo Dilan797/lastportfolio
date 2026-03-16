@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/styles_1.css">
 
-    
     <!-- Tailwind Config -->
     <script>
         tailwind.config = {
@@ -44,11 +43,9 @@
         }
     }
     </script>
-
-
 </head>
 <body class="bg-slate-900 text-white font-sans antialiased overflow-x-hidden overflow-y-auto lg:overflow-hidden">
-    
+
     <!-- Loading Screen -->
     <div id="loadingScreen" class="fixed inset-0 bg-gradient-purple flex items-center justify-center z-50 transition-opacity duration-500">
         <div class="w-12 h-12 border-4 border-white/30 border-t-white rounded-full spinner"></div>
@@ -56,11 +53,11 @@
 
     <!-- Layout Principal: Dos Columnas -->
     <main class="flex flex-col-reverse lg:flex-row min-h-screen lg:h-screen w-screen">
-        
+
         <!-- ========== COLUMNA IZQUIERDA: PESTAÑAS + PROYECTOS ========== -->
         <section class="flex-1 bg-slate-900 relative overflow-hidden flex flex-col p-4 lg:p-6
                 h-auto lg:h-screen overflow-y-auto lg:overflow-hidden">
-            
+
             <!-- Efectos de fondo -->
             <div class="absolute inset-0 opacity-30 pointer-events-none">
                 <div class="absolute top-[20%] left-[20%] w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
@@ -69,17 +66,17 @@
 
             <!-- CONTENEDOR PRINCIPAL -->
             <div class="relative z-10 flex flex-col h-auto lg:h-full">
-                
+
                 <!-- ========== SISTEMA DE PESTAÑAS ========== -->
                 <div class="flex flex-col flex-1">
-                    
+
                     <!-- Pestañas de Carpeta -->
                     <div class="folder-tabs-container">
                         <button class="folder-tab active" data-tab="electronica" onclick="switchTab('electronica')">
                             <span class="folder-icon">⚡</span>
                             <span>Electrónica Analógica III</span>
                         </button>
-                        
+
                         <button class="folder-tab" data-tab="programacion" onclick="switchTab('programacion')">
                             <span class="folder-icon">💻</span>
                         </button>
@@ -91,18 +88,15 @@
 
                     <!-- Cuerpo de la Carpeta -->
                     <div class="folder-body flex-1 overflow-hidden">
-                        
+
                         <!-- ========== TAB: ELECTRÓNICA ANALÓGICA III ========== -->
                         <div id="tab-electronica" class="tab-content active p-5 h-full overflow-y-auto custom-scrollbar">
-                            
-                            <!-- Header -->
+
                             <!-- ========== INTRODUCCIÓN + COLLAGE ========== -->
                             <div class="intro-collage-container">
-                                
+
                                 <!-- Introducción (izquierda) -->
                                 <div class="intro-content">
-                                    
-                                    <!-- Header con icono -->
                                     <div class="intro-header">
                                         <div class="intro-icon">⚡</div>
                                         <div class="intro-title-group">
@@ -110,22 +104,20 @@
                                             <p class="intro-subtitle">• Universidad Surcolombiana •</p>
                                         </div>
                                     </div>
-                                    
-                                    <!-- Texto de introducción -->
+
                                     <div class="intro-text">
                                         <p>
-                                            Proyectos desarrollados en la asignatura de <strong>Electrónica Analógica III</strong> 
-                                            enfocados en el diseño, simulación e implementación de circuitos con amplificadores 
+                                            Proyectos desarrollados en la asignatura de <strong>Electrónica Analógica III</strong>
+                                            enfocados en el diseño, simulación e implementación de circuitos con amplificadores
                                             operacionales, filtros activos y sistemas de instrumentación.
                                         </p>
                                         <p>
-                                            Cada proyecto incluye análisis teórico, simulación en Multisim, 
-                                            diseño de PCB en KiCad y validación experimental con documentación 
+                                            Cada proyecto incluye análisis teórico, simulación en Multisim,
+                                            diseño de PCB en KiCad y validación experimental con documentación
                                             de errores y soluciones encontradas.
                                         </p>
                                     </div>
-                                    
-                                    <!-- Tags de metodología -->
+
                                     <div class="intro-tags">
                                         <span class="tag tag-amber">📐 Análisis</span>
                                         <span class="tag tag-blue">💻 Simulación</span>
@@ -136,55 +128,38 @@
 
                                 <!-- Collage de fotos (derecha) -->
                                 <div class="collage-grid">
-                                    
-                                    <!-- Foto 1: Grande vertical -->
                                     <div class="collage-item collage-item-tall">
                                         <img src="./images/foto1.jpg" alt="Proyecto 1" onerror="this.parentElement.classList.add('no-image')" />
                                         <div class="collage-placeholder">
                                             <span class="collage-placeholder-icon">📷</span>
                                             <span class="collage-placeholder-text">Circuito</span>
                                         </div>
-                                        <div class="collage-overlay">
-                                            <span>Montaje PCB INA</span>
-                                        </div>
+                                        <div class="collage-overlay"><span>Montaje PCB INA</span></div>
                                     </div>
-                                    
-                                    <!-- Foto 2: Pequeña arriba derecha -->
                                     <div class="collage-item">
                                         <img src="./images/foto3.png" alt="Proyecto 2" onerror="this.parentElement.classList.add('no-image')" />
                                         <div class="collage-placeholder">
                                             <span class="collage-placeholder-icon">📷</span>
                                             <span class="collage-placeholder-text">Medición</span>
                                         </div>
-                                        <div class="collage-overlay">
-                                            <span>Validación</span>
-                                        </div>
+                                        <div class="collage-overlay"><span>Validación</span></div>
                                     </div>
-                                    
-                                    <!-- Foto 3: Pequeña medio derecha -->
                                     <div class="collage-item">
                                         <img src="./images/foto2.png" alt="Proyecto 3" onerror="this.parentElement.classList.add('no-image')" />
                                         <div class="collage-placeholder">
                                             <span class="collage-placeholder-icon">📷</span>
                                             <span class="collage-placeholder-text">Simulación</span>
                                         </div>
-                                        <div class="collage-overlay">
-                                            <span>Diseño KiCad</span>
-                                        </div>
+                                        <div class="collage-overlay"><span>Diseño KiCad</span></div>
                                     </div>
-                                    
-                                    <!-- Foto 4: Ancha abajo -->
                                     <div class="collage-item collage-item-wide">
                                         <img src="./images/foto4.JPG" alt="Proyecto 4" onerror="this.parentElement.classList.add('no-image')" />
                                         <div class="collage-placeholder">
                                             <span class="collage-placeholder-icon">📷</span>
                                             <span class="collage-placeholder-text">Protoboard</span>
                                         </div>
-                                        <div class="collage-overlay">
-                                            <span>Implementación</span>
-                                        </div>
+                                        <div class="collage-overlay"><span>Implementación</span></div>
                                     </div>
-                                    
                                 </div>
                             </div>
 
@@ -291,29 +266,26 @@
         </section>
 
         <!-- ========== COLUMNA DERECHA: TARJETA POLAROID ========== -->
-        <section class="flex items-center justify-center bg-slate-900     
+        <section class="flex items-center justify-center bg-slate-900
                         lg:w-[40%] lg:max-w-[400px]
                         xl:w-[35%] xl:max-w-[500px]
                         2xl:w-[32%] 2xl:max-w-[500px]
                         p-4 lg:p-6">
 
-            <!-- TARJETA POLAROID -->
-            <article class="w-full max-w-md h-full 
-                            max-h-[77vh] 
-                            lg:max-h-[90.5vh] 
-                            xl:max-h-[90vh] 
+            <article class="w-full max-w-md h-full
+                            max-h-[77vh]
+                            lg:max-h-[90.5vh]
+                            xl:max-h-[90vh]
                             2xl:max-h-[66vh]
                             bg-white rounded-xl shadow-2xl paper-texture
-                            p-4 lg:p-5 xl:p-6 
+                            p-4 lg:p-5 xl:p-6
                             flex flex-col">
 
                 <!-- SECCIÓN SUPERIOR: AVATAR + INFO -->
                 <div class="flex gap-4 mb-3 flex-shrink-0">
-
-                    <!-- Avatar 3D -->
                     <div class="w-1/2 bg-slate-900 rounded-sm shadow-inner relative overflow-hidden
                                 h-[180px] sm:h-[200px] lg:h-[150px] xl:h-[170px] 2xl:h-[180px]">
-                        <div id="stage" class="relative w-full h-full" 
+                        <div id="stage" class="relative w-full h-full"
                             role="img" aria-label="Avatar 3D interactivo de Dilan">
                             <div id="hud" class="absolute left-2 top-2 bg-white/20 backdrop-blur-md px-2 py-1 rounded text-[8px] font-semibold text-white/95 font-mono tracking-wide shadow-lg border border-white/25 z-10" aria-live="polite">
                                 Cargando…
@@ -321,7 +293,6 @@
                         </div>
                     </div>
 
-                    <!-- INFO - DERECHA -->
                     <div class="w-1/2 flex flex-col justify-center gap-2">
                         <div>
                             <p class="text-xs lg:text-sm font-semibold text-gray-700 leading-tight">
@@ -345,12 +316,12 @@
                     <div class="flex items-center justify-between gap-2">
                         <p class="text-[11px] lg:text-xs text-gray-600 font-mono leading-none">u20212201884@usco.edu.co</p>
                         <div class="flex items-center gap-1">
-                            <a href="https://www.linkedin.com/in/tu-perfil" target="_blank" rel="noopener noreferrer" 
+                            <a href="https://www.linkedin.com/in/tu-perfil" target="_blank" rel="noopener noreferrer"
                                 class="w-7 h-7 flex items-center justify-center bg-gray-100 border border-black/10 rounded-md hover:bg-gradient-purple hover:text-white transition-all duration-300"
                                 title="LinkedIn">
                                 <span class="text-base">💼</span>
                             </a>
-                            <a href="https://github.com/tu-usuario" target="_blank" rel="noopener noreferrer"
+                            <a href="https://github.com/Dilan797" target="_blank" rel="noopener noreferrer"
                                 class="w-7 h-7 flex items-center justify-center bg-gray-100 border border-black/10 rounded-md hover:bg-gradient-purple hover:text-white transition-all duration-300"
                                 title="GitHub">
                                 <span class="text-base">🐙</span>
@@ -368,12 +339,11 @@
                 <div class="mt-2 flex-shrink-0">
                     <h2 class="text-sm lg:text-[15px] font-bold text-gray-800 font-serif italic mb-0.5">Hello!</h2>
                     <p class="text-[10px] lg:text-[11px] leading-snug text-gray-600 text-justify">
-                        Estudiante de Ingeniería Electrónica apasionado por el diseño de circuitos. 
+                        Estudiante de Ingeniería Electrónica apasionado por el diseño de circuitos.
                         Experiencia en proyectos académicos con validación en campo y análisis de resultados.
                     </p>
                 </div>
 
-                <!-- SEPARADOR -->
                 <div class="w-full h-px bg-gradient-to-r from-transparent via-black/20 to-transparent my-2"></div>
 
                 <!-- CHATBOT ASISTENTE -->
@@ -383,7 +353,7 @@
                         <span class="text-[8px] text-gray-400 font-mono">Online</span>
                     </div>
 
-                    <div id="chatMessages" class="flex-1 bg-gray-50 rounded-lg p-2 overflow-y-auto custom-scrollbar flex flex-col gap-1.5 min-h-0 border border-gray-200" 
+                    <div id="chatMessages" class="flex-1 bg-gray-50 rounded-lg p-2 overflow-y-auto custom-scrollbar flex flex-col gap-1.5 min-h-0 border border-gray-200"
                             role="log" aria-live="polite">
                         <div class="message flex max-w-[85%] self-start">
                             <p class="bg-white text-gray-800 rounded-lg rounded-bl-sm shadow-sm px-2.5 py-1.5 text-[10px] lg:text-[9px] leading-snug border border-gray-200">
@@ -417,7 +387,6 @@
     <!-- ========== MODAL DE PROYECTO ========== -->
     <div id="projectModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar my-8" onclick="event.stopPropagation()">
-            <!-- Header del Modal -->
             <div class="sticky top-0 bg-gradient-purple text-white p-6 rounded-t-2xl flex justify-between items-start z-10">
                 <div class="flex items-center gap-4 flex-1">
                     <div id="modalIcon" class="text-5xl"></div>
@@ -430,11 +399,7 @@
                     ×
                 </button>
             </div>
-
-            <!-- Contenido del Modal -->
-            <div id="modalContent" class="p-6">
-                <!-- El contenido se genera dinámicamente en projects.js -->
-            </div>
+            <div id="modalContent" class="p-6"></div>
         </div>
     </div>
 
@@ -468,18 +433,14 @@
 
             // 2) Variables de estado
             let pos = 0;
-            let speed = 0.5; // px por frame
+            let speed = 0.5;
             let paused = false;
             let dragging = false;
-            let startX = 0;
-            let dragOffset = 0;
             let lastDragX = 0;
             let dragVelocity = 0;
             let halfWidth = 0;
-            let raf;
 
             function measure() {
-                // Ancho de la mitad (los items originales)
                 halfWidth = 0;
                 const gap = parseFloat(getComputedStyle(track).gap) || 12;
                 for (let i = 0; i < items.length; i++) {
@@ -488,22 +449,21 @@
             }
             measure();
 
-            // 3) Loop de animación con requestAnimationFrame
+            // 3) Loop de animación
             function loop() {
                 if (!dragging && !paused) {
                     pos -= speed;
                 }
 
-                // Reset seamless
                 if (halfWidth > 0) {
                     if (pos <= -halfWidth) pos += halfWidth;
                     if (pos > 0) pos -= halfWidth;
                 }
 
                 track.style.transform = 'translate3d(' + pos + 'px, 0, 0)';
-                raf = requestAnimationFrame(loop);
+                requestAnimationFrame(loop);
             }
-            raf = requestAnimationFrame(loop);
+            requestAnimationFrame(loop);
 
             // 4) Pausa al hover (desktop)
             track.addEventListener('mouseenter', () => { paused = true; });
@@ -515,8 +475,7 @@
             function onStart(e) {
                 dragging = true;
                 paused = true;
-                startX = (e.touches ? e.touches[0].clientX : e.clientX);
-                lastDragX = startX;
+                lastDragX = (e.touches ? e.touches[0].clientX : e.clientX);
                 dragVelocity = 0;
                 track.style.cursor = 'grabbing';
             }
@@ -535,7 +494,6 @@
                 dragging = false;
                 track.style.cursor = '';
 
-                // Inercia: continuar brevemente con la velocidad del drag
                 let momentum = dragVelocity;
                 function decay() {
                     if (Math.abs(momentum) < 0.3) {
@@ -549,7 +507,6 @@
                 decay();
             }
 
-            // Prevenir click en items si hubo drag significativo
             let clickStartX = 0;
             track.addEventListener('mousedown', (e) => {
                 clickStartX = e.clientX;
@@ -558,7 +515,6 @@
             track.addEventListener('mousemove', onMove);
             track.addEventListener('mouseup', (e) => {
                 onEnd();
-                // Si se arrastró más de 5px, bloquear el click
                 if (Math.abs(e.clientX - clickStartX) > 5) {
                     track.addEventListener('click', function block(ev) {
                         ev.stopPropagation();
@@ -583,7 +539,7 @@
                 paused = document.hidden;
             });
 
-            // 8) Flechas laterales — avance suave por item
+            // 8) Flechas laterales
             const arrowLeft = document.querySelector('.carousel-arrow-left');
             const arrowRight = document.querySelector('.carousel-arrow-right');
             const itemStep = () => {

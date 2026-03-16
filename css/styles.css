@@ -207,7 +207,6 @@ body {
 .carousel-arrow-left { left: 6px; }
 .carousel-arrow-right { right: 6px; }
 
-/* Mobile: flechas un poco más pequeñas */
 @media (max-width: 639px) {
     .carousel-arrow {
         width: 28px;
@@ -272,65 +271,31 @@ body {
     font-size: 8px;
 }
 
-/* Mobile: tarjetas más compactas pero touch-friendly */
 @media (max-width: 639px) {
-    .carousel-item {
-        width: 130px;
-    }
-    .carousel-item-gradient {
-        height: 64px;
-    }
+    .carousel-item { width: 130px; }
+    .carousel-item-gradient { height: 64px; }
 }
 
-/* Tablets */
 @media (min-width: 640px) and (max-width: 1023px) {
-    .carousel-item {
-        width: 150px;
-    }
-    .carousel-item-gradient {
-        height: 76px;
-    }
-    .carousel-item-title {
-        font-size: 11px;
-    }
-    .carousel-item-tech {
-        font-size: 9px;
-    }
+    .carousel-item { width: 150px; }
+    .carousel-item-gradient { height: 76px; }
+    .carousel-item-title { font-size: 11px; }
+    .carousel-item-tech { font-size: 9px; }
 }
 
-/* Desktop */
 @media (min-width: 1024px) {
-    .carousel-item {
-        width: 155px;
-    }
-    .carousel-item-gradient {
-        height: 80px;
-    }
-    .carousel-item-body {
-        padding: 10px 12px 12px;
-    }
-    .carousel-item-title {
-        font-size: 11px;
-    }
-    .carousel-item-tech {
-        font-size: 9px;
-    }
+    .carousel-item { width: 155px; }
+    .carousel-item-gradient { height: 80px; }
+    .carousel-item-body { padding: 10px 12px 12px; }
+    .carousel-item-title { font-size: 11px; }
+    .carousel-item-tech { font-size: 9px; }
 }
 
-/* Desktop grande */
 @media (min-width: 1440px) {
-    .carousel-item {
-        width: 165px;
-    }
-    .carousel-item-gradient {
-        height: 85px;
-    }
-    .carousel-item-title {
-        font-size: 12px;
-    }
-    .carousel-item-tech {
-        font-size: 10px;
-    }
+    .carousel-item { width: 165px; }
+    .carousel-item-gradient { height: 85px; }
+    .carousel-item-title { font-size: 12px; }
+    .carousel-item-tech { font-size: 10px; }
 }
 
 /* line clamp utility */
@@ -342,7 +307,6 @@ body {
     text-overflow: ellipsis;
 }
 
-/* Ocultar scrollbar */
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
