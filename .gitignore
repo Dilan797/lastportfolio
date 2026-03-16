@@ -35,3 +35,6 @@ package-lock.json
 
 #.env
 .env
+
+# PDF backups (originales sin comprimir)
+docs/*_BACKUP.pdf
