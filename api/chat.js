@@ -1,4 +1,4 @@
-// functions/api/chat.js - Cloudflare Pages Function
+// api/chat.js - Vercel Serverless Function
 
 // ============================================
 // CONTEXTO DEL PORTAFOLIO - PROYECTOS DE DILAN
@@ -57,7 +57,7 @@ const PORTFOLIO_CONTEXT = `
     - Salida: 5V ± 0.2V regulado
     - Corriente máxima: 1A con disipador
     - Ripple: < 10mV a plena carga
-    - **Proceso de fabricación**:
+- **Proceso de fabricación**:
     1. Diseño en KiCad (esquemático + PCB)
     2. Generación de G-code con FlatCAM
     3. Fresado de PCB en CNC (Mach3)
@@ -70,8 +70,8 @@ const PORTFOLIO_CONTEXT = `
 - **Temas cubiertos**:
     - Generador de envolvente ADSR (Attack-Decay-Sustain-Release)
     - Oscilador de baja frecuencia LFO (0.1-20 Hz)
-    - **Componentes estudiados**: NE555/ICM7555, XR2206, TL071/TL074
-    - **Ecuaciones clave**:
+- **Componentes estudiados**: NE555/ICM7555, XR2206, TL071/TL074
+- **Ecuaciones clave**:
     - Tiempo del 555: t = 0.693 × R × C
     - Buffer TL07x: Salidas 0-10V de baja impedancia
 - **Simulación en Multisim**: Curvas ADSR y formas de onda LFO documentadas
@@ -84,7 +84,7 @@ const PORTFOLIO_CONTEXT = `
     - Sustain: 0 – 100%
     - Release: 50 ms – 1.5 s
     - Salida: 0-10V / ±10V con attenuverter
-    - **Especificaciones LFO**:
+- **Especificaciones LFO**:
     - Frecuencia: 1-20 Hz
     - Formas de onda: SQR, TRI, SINE
     - THD (seno): < 5%
@@ -111,10 +111,10 @@ const PORTFOLIO_CONTEXT = `
 
 ## HABILIDADES BLANDAS DE DILAN
 - Trabajo en equipo (proyecto del póster integró 4 equipos)
-- Documentación técnica rigurosa (cada proyecto tiene marco teórico, objetivos, proceso, errores y soluciones)
-- Metodología Lean Startup aplicada a ingeniería (iteración, validación, pivoteo)
-- Resolución de problemas (cada proyecto documenta problemas encontrados y sus soluciones)
-- Capacidad de aprendizaje autónomo (combina ingeniería electrónica con programación web 3D)
+- Documentación técnica rigurosa
+- Metodología Lean Startup aplicada a ingeniería
+- Resolución de problemas
+- Capacidad de aprendizaje autónomo
 `;
 
 // ============================================
@@ -142,19 +142,29 @@ ${PORTFOLIO_CONTEXT}
 - Si te piden comparar proyectos o dar una opinión, basa tu respuesta en los datos documentados`;
 
 // ============================================
-// HANDLER - Cloudflare Pages Function
+// HANDLER - Vercel Serverless Function
 // ============================================
-export async function onRequestPost(context) {
-    const { request, env } = context;
+export default async function handler(req, res) {
+    // CORS headers
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+
+    // Preflight
+    if (req.method === 'OPTIONS') {
+        return res.status(204).end();
+    }
+
+    // Solo POST
+    if (req.method !== 'POST') {
+        return res.status(405).json({ error: 'Método no permitido' });
+    }
 
     try {
-        const { message, history = [] } = await request.json();
+        const { message, history = [] } = req.body;
 
         if (!message || typeof message !== 'string') {
-            return Response.json(
-                { error: 'Mensaje requerido' },
-                { status: 400, headers: corsHeaders() }
-            );
+            return res.status(400).json({ error: 'Mensaje requerido' });
         }
 
         // Construir mensajes para la API
@@ -169,7 +179,7 @@ export async function onRequestPost(context) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${env.DEEPSEEK_API_KEY}`
+                'Authorization': `Bearer ${process.env.DEEPSEEK_API_KEY}`
             },
             body: JSON.stringify({
                 model: 'deepseek-chat',
@@ -183,47 +193,22 @@ export async function onRequestPost(context) {
         if (!response.ok) {
             const errorData = await response.text();
             console.error('DeepSeek API Error:', errorData);
-            return Response.json(
-                {
-                    error: 'Error al comunicarse con la IA',
-                    reply: 'Lo siento, hay un problema con el servicio. Intenta de nuevo más tarde.'
-                },
-                { status: 500, headers: corsHeaders() }
-            );
+            return res.status(500).json({
+                error: 'Error al comunicarse con la IA',
+                reply: 'Lo siento, hay un problema con el servicio. Intenta de nuevo más tarde.'
+            });
         }
 
         const data = await response.json();
         const reply = data.choices[0]?.message?.content || 'No pude generar una respuesta.';
 
-        return Response.json(
-            { reply },
-            { status: 200, headers: corsHeaders() }
-        );
+        return res.status(200).json({ reply });
 
     } catch (error) {
         console.error('Function error:', error);
-        return Response.json(
-            {
-                error: 'Error interno del servidor',
-                reply: 'Ocurrió un error inesperado. Por favor, intenta de nuevo.'
-            },
-            { status: 500, headers: corsHeaders() }
-        );
+        return res.status(500).json({
+            error: 'Error interno del servidor',
+            reply: 'Ocurrió un error inesperado. Por favor, intenta de nuevo.'
+        });
     }
-}
-
-// Manejar preflight CORS
-export async function onRequestOptions() {
-    return new Response(null, {
-        status: 204,
-        headers: corsHeaders()
-    });
-}
-
-function corsHeaders() {
-    return {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS'
-    };
 }

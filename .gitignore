@@ -1,4 +1,4 @@
-# Archivos del sistema operativo
+# Sistema
 .DS_Store
 Thumbs.db
 desktop.ini
@@ -8,33 +8,22 @@ desktop.ini
 .idea/
 *.swp
 *.swo
-*~
+
+# Dependencias
+node_modules/
 
 # Archivos temporales
 *.log
 *.tmp
 .cache/
 
-# Node modules
-node_modules/
-package-lock.json
-
-# Archivos de respaldo
-*.bak
-*~
-
-# Netlify
-.netlify/
-
-# Cloudflare
-.dev.vars
-.wrangler/
-
-# Snyk Security Extension - AI Rules (auto-generated)
-.github/instructions/snyk_rules.instructions.md
-
-#.env
+# Env / Secrets
 .env
+.env.local
+.env*.local
+
+# Vercel
+.vercel/
 
 # PDF backups (originales sin comprimir)
 docs/*_BACKUP.pdf

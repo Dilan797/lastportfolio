@@ -95,7 +95,6 @@ class PortfolioChatbot {
     }
 
     async sendToAI(message) {
-        // URL de la función Cloudflare Pages
         const apiUrl = '/api/chat';
 
         const response = await fetch(apiUrl, {

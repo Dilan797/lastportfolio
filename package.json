@@ -1,13 +1,5 @@
 {
-    "name": "portfolio-chatbot",
+    "name": "portfolio-dilan",
     "version": "1.0.0",
-    "description": "Portfolio de Dilan con chatbot IA usando DeepSeek",
-    "scripts": {
-        "dev": "npx wrangler pages dev . --port 8788",
-        "build": "echo 'Static site — no build needed'",
-        "deploy": "npx wrangler pages deploy ."
-    },
-    "devDependencies": {
-        "wrangler": "^4.0.0"
-    }
+    "description": "Portfolio de Dilan con chatbot IA usando DeepSeek"
 }
