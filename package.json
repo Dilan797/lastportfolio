@@ -1,5 +1,6 @@
 {
     "name": "portfolio-dilan",
     "version": "1.0.0",
+    "type": "module",
     "description": "Portfolio de Dilan con chatbot IA usando DeepSeek"
 }
